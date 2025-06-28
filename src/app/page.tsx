@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function page() {
-  return (
-    <div>Home</div>
-  )
+  return <div className="flex items-center justify-center">Home</div>;
 }
 
-export default page
+export default page;

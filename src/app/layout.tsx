@@ -29,7 +29,14 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {children}
+          <div className="container mx-auto px-4">
+            <header className="py-4">
+              <h1 className="text-3xl font-bold">Todo App</h1>
+            </header>
+          </div>
+          <main className="my-8">
+            <div className="shadow-md rounded-lg p-6">{children}</div>
+          </main>
         </body>
       </html>
     </ClerkProvider>
