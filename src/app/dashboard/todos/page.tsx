@@ -21,7 +21,30 @@ export default async function DashboardPage() {
             className="border rounded p-2 flex justify-between"
           >
             <span>{todo.title}</span>
-            <span>{todo.completed ? '✅' : '🕒'}</span>
+            <form action={() => toggleTodo(todo._id.toString())}>
+              <button
+                type="submit"
+                className={`text-sm px-2 py-1 rounded ${
+                  todo.completed ? 'bg-green-500 text-white' : 'bg-gray-300'
+                }`}
+              >
+                {todo.completed ? 'Undo' : 'Done'}
+              </button>
+            </form>
+            <form action={() => deleteTodo(todo._id.toString())}>
+              <button
+                type="submit"
+                className="ml-2 text-red-500 hover:underline text-sm"
+              >
+                Delete
+              </button>
+            </form>
+            <a
+              href={`/dashboard/todos/${todo._id.toString()}/edit`}
+              className="text-blue-500 hover:underline text-sm ml-2"
+            >
+              Edit
+            </a>
           </li>
         ))}
       </ul>
