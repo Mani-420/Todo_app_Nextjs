@@ -831,11 +831,11 @@ This is Next.js catch-all routing. Clerk needs to handle multiple routes like:
 
 ```env
 # MongoDB
-MONGODB_URI=mongodb+srv://your-username:your-password@your-cluster.mongodb.net/todoApp?retryWrites=true&w=majority
+MONGODB_URI=secret------
 
 # Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_your-publishable-key
-CLERK_SECRET_KEY=sk_test_your-secret-key
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=secret------
+CLERK_SECRET_KEY=secret------
 
 # URLs
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
