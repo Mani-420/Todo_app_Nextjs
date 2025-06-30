@@ -2,52 +2,39 @@ import { auth } from '@clerk/nextjs/server';
 import connectDB from '@/lib/db';
 import { Todo } from '@/models/Todo';
 import TodoForm from '@/components/TodoForm';
+import TodoItem from '@/components/TodoItem';
 
 export default async function DashboardPage() {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return <div>Please sign in</div>;
 
   await connectDB();
   const todos = await Todo.find({ userId }).sort({ createdAt: -1 });
 
   return (
-    <main className="max-w-xl mx-auto mt-8 px-4">
-      <h1 className="text-2xl font-bold mb-4">Your Todos</h1>
+    <main className="max-w-4xl mx-auto mt-8 px-4">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Your Todos</h1>
       <TodoForm />
-      <ul className="mt-6 space-y-2">
-        {todos.map((todo) => (
-          <li
-            key={todo._id.toString()}
-            className="border rounded p-2 flex justify-between"
-          >
-            <span>{todo.title}</span>
-            <form action={() => toggleTodo(todo._id.toString())}>
-              <button
-                type="submit"
-                className={`text-sm px-2 py-1 rounded ${
-                  todo.completed ? 'bg-green-500 text-white' : 'bg-gray-300'
-                }`}
-              >
-                {todo.completed ? 'Undo' : 'Done'}
-              </button>
-            </form>
-            <form action={() => deleteTodo(todo._id.toString())}>
-              <button
-                type="submit"
-                className="ml-2 text-red-500 hover:underline text-sm"
-              >
-                Delete
-              </button>
-            </form>
-            <a
-              href={`/dashboard/todos/${todo._id.toString()}/edit`}
-              className="text-blue-500 hover:underline text-sm ml-2"
-            >
-              Edit
-            </a>
-          </li>
-        ))}
-      </ul>
+      {todos.length === 0 ? (
+        <div className="mt-8 text-center py-8 text-gray-500">
+          <p>No todos yet. Create your first todo above!</p>
+        </div>
+      ) : (
+        <ul className="mt-6 space-y-3">
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo._id.toString()}
+              todo={{
+                _id: todo._id.toString(),
+                title: todo.title,
+                completed: todo.completed,
+                userId: todo.userId,
+                createdAt: todo.createdAt
+              }}
+            />
+          ))}
+        </ul>
+      )}
     </main>
   );
 }

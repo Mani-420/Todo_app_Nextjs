@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default async function EditTodoPage({ params }: Props) {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return <div>Unauthorized</div>;
 
   await connectDB();

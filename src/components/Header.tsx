@@ -5,23 +5,42 @@ import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 export default function Header() {
   return (
-    <header className="bg-white shadow px-4 py-3 flex justify-between items-center">
-      <Link href="/" className="text-xl font-bold text-blue-600">
+    <header className="bg-white shadow-md border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+      <Link
+        href="/"
+        className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors"
+      >
         Todo App
       </Link>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <SignedIn>
-          <Link href="/dashboard" className="text-blue-500 hover:underline">
+          <Link
+            href="/dashboard/todos"
+            className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+          >
             Dashboard
           </Link>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                avatarBox: 'w-8 h-8'
+              }
+            }}
+          />
         </SignedIn>
         <SignedOut>
-          <Link href="/sign-in" className="text-blue-500 hover:underline">
+          <Link
+            href="/sign-in"
+            className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+          >
             Sign In
           </Link>
-          <Link href="/sign-up" className="text-blue-500 hover:underline">
+          <Link
+            href="/sign-up"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          >
             Sign Up
           </Link>
         </SignedOut>
