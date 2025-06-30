@@ -8,7 +8,18 @@ if (!MONGODB_URI) {
   );
 }
 
-let cached = (global as any).mongoose || { conn: null, promise: null };
+// Define proper types for the cached connection
+interface CachedConnection {
+  conn: typeof import('mongoose') | null;
+  promise: Promise<typeof import('mongoose')> | null;
+}
+
+// Use proper typing instead of 'any' and declare as const since we modify properties
+const cached: CachedConnection = (
+  global as typeof globalThis & {
+    mongoose?: CachedConnection;
+  }
+).mongoose || { conn: null, promise: null };
 
 async function connectDB() {
   if (cached.conn) return cached.conn;
@@ -21,6 +32,14 @@ async function connectDB() {
   }
 
   cached.conn = await cached.promise;
+
+  // Store the cached connection globally for reuse
+  (
+    global as typeof globalThis & {
+      mongoose?: CachedConnection;
+    }
+  ).mongoose = cached;
+
   return cached.conn;
 }
 

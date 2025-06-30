@@ -6,15 +6,17 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function EditTodoPage({ params }: Props) {
   const { userId } = await auth();
   if (!userId) return <div>Unauthorized</div>;
 
+  const { id } = await params;
+  
   await connectDB();
-  const todo = await Todo.findOne({ _id: params.id, userId });
+  const todo = await Todo.findOne({ _id: id, userId });
 
   if (!todo) {
     redirect('/dashboard/todos');
@@ -28,7 +30,7 @@ export default async function EditTodoPage({ params }: Props) {
         <form
           action={async (formData) => {
             'use server';
-            await updateTodo(params.id, formData);
+            await updateTodo(id, formData);
             redirect('/dashboard/todos');
           }}
           className="space-y-4"

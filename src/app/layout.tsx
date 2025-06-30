@@ -16,7 +16,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Todo App',
-  description: 'Full Stack Todo App with Next.js 15, MongoDB, and Clerk'
+  description: 'Full Stack Todo App with Next.js 15, MongoDB, and Clerk',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
