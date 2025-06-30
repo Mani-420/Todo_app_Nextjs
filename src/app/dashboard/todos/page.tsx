@@ -13,7 +13,7 @@ export default async function DashboardPage() {
 
   return (
     <main className="max-w-4xl mx-auto mt-8 px-4">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Your Todos</h1>
+      <h1 className="text-3xl font-bold mb-6 text-blue-600">Your Todos</h1>
       <TodoForm />
       {todos.length === 0 ? (
         <div className="mt-8 text-center py-8 text-gray-500">

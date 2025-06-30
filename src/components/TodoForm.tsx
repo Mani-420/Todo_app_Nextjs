@@ -35,7 +35,7 @@ export default function TodoForm() {
       <input
         name="title"
         placeholder="Enter a new todo..."
-        className="border border-gray-300 px-4 py-2 rounded-lg flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="text-black border border-gray-300 px-4 py-2 rounded-lg flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         required
       />
       <SubmitButton />

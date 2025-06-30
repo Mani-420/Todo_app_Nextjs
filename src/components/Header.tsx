@@ -5,7 +5,7 @@ import { UserButton, SignedIn, SignedOut } from '@clerk/nextjs';
 
 export default function Header() {
   return (
-    <header className="bg-white shadow-md border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+    <header className="shadow-md border-b px-6 py-4 flex justify-between items-center">
       <Link
         href="/"
         className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors"
